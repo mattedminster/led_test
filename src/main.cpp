@@ -140,17 +140,30 @@ void loop() {
   uint16_t localIn3 = in3;
   interrupts();
 
-  Serial.print("R: ");
-  Serial.print(localIn0);
-  Serial.print(" G: ");
-  Serial.print(localIn1);
-  Serial.print(" B: ");
-  Serial.print(localIn2);
-  Serial.print(" W: ");
-  Serial.println(localIn3);
+  // Serial.print("R: ");
+  // Serial.print(localIn0);
+  // Serial.print(" G: ");
+  // Serial.print(localIn1);
+  // Serial.print(" B: ");
+  // Serial.print(localIn2);
+  // Serial.print(" W: ");
+  // Serial.println(localIn3);
 
-  ledcWrite(CH_R, map(localIn0, 1, 2450, 0, 1023));
-  ledcWrite(CH_G, map(localIn1, 1, 2450, 0, 1023));
-  ledcWrite(CH_B, map(localIn2, 1, 2450, 0, 1023));
-  ledcWrite(CH_W, map(localIn3, 1, 2450, 0, 1023));
+  int valueR = map(in0, 1000, 2000, 0, 1023);
+  valueR = constrain(valueR, 0, 1023);
+
+  int valueG = map(in1, 1000, 2000, 0, 1023);
+  valueG = constrain(valueG, 0, 1023);
+
+  int valueB = map(in2, 1000, 2000, 0, 1023);
+  valueB = constrain(valueB, 0, 1023);
+
+  int valueW = map(in3, 1000, 2000, 0, 1023);
+  valueW = constrain(valueW, 0, 1023);
+
+  ledcWrite(CH_R, valueR);
+  ledcWrite(CH_G, valueG);
+  ledcWrite(CH_B, valueB);
+  ledcWrite(CH_W, valueW);
+
 }
